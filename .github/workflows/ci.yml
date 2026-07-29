@@ -197,6 +197,6 @@ jobs:
           check CLAUDE.md '\[YOUR_NAME\]'
           check cv/main_example.tex '\[YOUR_NAME\]'
           check cover_letters/cover_example.tex '\[YOUR NAME\]'
-          check .claude/skills/job-application-assistant/01-candidate-profile.md '<!-- SETUP'
-          check .claude/skills/job-application-assistant/04-job-evaluation.md '\[YOUR_PRIMARY_SKILLS\]'
+          check config/01-candidate-profile.md '<!-- SETUP'
+          check config/04-job-evaluation.md '\[YOUR_PRIMARY_SKILLS\]'
           exit $fail

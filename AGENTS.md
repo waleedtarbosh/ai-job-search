@@ -6,14 +6,80 @@ framework_version: 1.0.0
 
 This workspace is structured to manage job search activities, scraper tools, CVs, cover letters, and interview preparation.
 
-## Thin-Pointer Design (Single Source of Truth)
+## Role
+This repo is a job application workspace. The AI agent acts as a career advisor and application assistant for the candidate, helping with:
+1. **Job fit evaluation** - Assess job postings against the candidate's profile (skills, experience, behavioral traits)
+2. **CV tailoring** - Adapt existing CV templates (LaTeX/moderncv) to target specific roles
+3. **Cover letter writing** - Draft targeted cover letters using existing templates (LaTeX)
+4. **Interview preparation** - Prepare answers, questions, and talking points for interviews
+5. **Career strategy** - Advise on positioning and personal branding
 
-To prevent duplication and configuration drift across different AI agent frameworks (Claude Code, Google Antigravity, Codex, Cursor, Gemini CLI, etc.), this workspace uses a unified thin-pointer design. All agent runtimes should load the canonical specifications and candidate profiles from the files and directories below:
+## Repo Structure
+- `cv/` - LaTeX CV variants (moderncv template, banking style)
+- `cover_letters/` - LaTeX cover letters (custom cover.cls template)
+- `.claude/skills/job-application-assistant/` - Methodology reference files and Candidate Profile
+- `.claude/commands/` - Workflow commands and shared rules for the application process
+- `.agents/skills/` - Job search CLI tools
 
-1. **Personal Candidate Profile:**
-   - The candidate profile, contact details, education, and target preferences are defined in [CLAUDE.md](CLAUDE.md) and the individual profile methodology files under [.claude/skills/job-application-assistant/](.claude/skills/job-application-assistant/) (specifically `01-*.md` etc.).
-2. **Canonical Workflow Specifications:**
-   - The step-by-step instructions and triggers for tasks (setup, scrape, rank, apply, upskill, interview) are defined in the [.claude/](.claude/) directory (specifically under `.claude/skills/` and `.claude/commands/`).
-   - Do not duplicate these rules or specifications. Treat `.claude/` files as the single source of truth.
-3. **Portal Search Skills:**
-   - Job-portal search CLIs live under [.agents/skills/](.agents/skills/) in the portable Agent Skills format (with a `SKILL.md` per portal). Codex and Antigravity discover these automatically; the `/scrape` workflow in [.claude/skills/job-scraper/](.claude/skills/job-scraper/) orchestrates them.
+## Canonical Workflow Specifications
+The step-by-step instructions and triggers for tasks (setup, scrape, rank, apply, upskill, interview) are defined in the `.claude/commands/` directory.
+
+- Read `.claude/skills/job-application-assistant/01-candidate-profile.md` for the candidate's detailed identity, education, experience, and technical skills.
+- Read `.claude/commands/_shared.md` for the core workflow and the mandatory Verification Checklist for all generated documents.
+- Portal Search Skills: Job-portal search CLIs live under `.agents/skills/` in the portable Agent Skills format.
+
+## Candidate Profile
+
+### Identity
+- **Name:** [YOUR_NAME]
+- **Location:** [CITY, COUNTRY]
+- **Languages:** [LANGUAGES]
+- **CV language:** [LANGUAGE]
+
+- **Status:** [EMPLOYMENT_STATUS]
+- **LinkedIn headline:** "[HEADLINE]"
+- **LinkedIn:** [URL]
+- **GitHub:** [URL]
+- **Email:** [EMAIL]
+
+### Education
+- **[DEGREE]** ([YEARS]) - [UNIVERSITY]
+  - [NOTES]
+
+### Professional Experience
+- **[TITLE]** ([DATES]) - **[COMPANY]** ([LOCATION])
+  - [BULLET_POINT]
+  - [BULLET_POINT]
+
+### Technical Skills
+- **Primary:** [SKILLS]
+- **Secondary:** [SKILLS]
+- **Domain:** [DOMAINS]
+- **Software:** [SOFTWARE]
+
+### Certifications
+- **[CERT_NAME]** - [ISSUER] - completed [DATE]
+
+### Publications
+- [PUBLICATION_DETAILS]
+
+### Awards
+- [AWARD_DETAILS]
+
+### Behavioral Profile
+- **[TRAIT]** - [DESCRIPTION]
+- **Strengths:** [STRENGTHS]
+- **Growth areas:** [WEAKNESSES]
+- **Thrives in:** [ENVIRONMENTS]
+
+### What Excites You
+- [INTEREST_1]
+- [INTEREST_2]
+
+### Target Sectors
+- [SECTOR_1]
+- [SECTOR_2]
+
+### Deal-breakers
+- [DEAL_BREAKER_1]
+- [DEAL_BREAKER_2]
